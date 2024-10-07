@@ -1,4 +1,22 @@
 <resources>
-    <string name="app_name">mobileproject</string>
+    <string name="app_name">AmazingReceipt</string>
     <string name ="api_key"> 3477bd1c16e74a6c808497450e1d6144</string>
+
+    <string-array name="tags">
+        <item>main course</item>
+        <item>side dish</item>
+        <item>dessert</item>
+        <item>appetizer</item>
+        <item>salad</item>
+        <item>bread</item>
+        <item>breakfast</item>
+        <item>soup</item>
+        <item>beverage</item>
+        <item>sauce</item>
+        <item>marinade</item>
+        <item>fingerfood</item>
+        <item>snack</item>
+        <item>drink</item>
+        <item>create my own</item>
+    </string-array>
 </resources>

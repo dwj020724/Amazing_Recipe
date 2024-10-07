@@ -28,10 +28,11 @@
             <Spinner
                 android:id="@+id/spinner_tags"
                 android:gravity="center"
-                android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/white"
                 android:entries="@array/tags"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>

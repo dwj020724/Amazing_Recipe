@@ -8,6 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.view.inputmethod.InputMethodManager;
+import android.content.Context;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
                 tags.add(query);
                 manager.getRandomRecipes(randomRecipeResponseListener, tags);
                 dialog.show();
+                // 隐藏键盘
+                View view = MainActivity.this.getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+
                 return true;
             }
 

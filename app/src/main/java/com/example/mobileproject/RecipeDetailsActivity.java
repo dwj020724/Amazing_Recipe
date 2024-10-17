@@ -4,17 +4,21 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobileproject.Models.Ingredient;
 import com.example.mobileproject.Models.RecipeDetailsResponse;
 import com.squareup.picasso.Picasso;
 
+import Adapters.IngredientsAdapter;
 import Listeners.RecipeDetailsListener;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
@@ -24,7 +28,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     RecyclerView recycler_meal_ingredients;
     RequestManager manager;
     ProgressDialog dialog;
-
+    IngredientsAdapter ingredientsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +64,16 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             textView_meal_summary.setText(response.summary);
             Picasso.get().load(response.image).into(imageView_meal_image);
 
+            recycler_meal_ingredients.setHasFixedSize(true);
+            recycler_meal_ingredients.setLayoutManager(new LinearLayoutManager(RecipeDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
+            ingredientsAdapter = new IngredientsAdapter(RecipeDetailsActivity.this, response.extendedIngredients);
+            recycler_meal_ingredients.setAdapter(ingredientsAdapter);
+
         }
 
         @Override
         public void didError(String message) {
-
+            Toast.makeText(RecipeDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
         }
     };
 }

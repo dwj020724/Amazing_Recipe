@@ -1,6 +1,7 @@
 package com.example.mobileproject;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -126,7 +127,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         //show the recipe id
         public void onRecipeClicked(String id) {
-            Toast.makeText(MainActivity.this, id, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, RecipeDetailsActivity.class)
+                    .putExtra("id",id));
         }
     };
 }

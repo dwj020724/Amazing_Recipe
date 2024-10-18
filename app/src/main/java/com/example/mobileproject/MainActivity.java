@@ -1,6 +1,7 @@
 package com.example.mobileproject;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import Adapters.RandomRecipeAdapter;
 import Listeners.RandomRecipeResponseListener;
+import Listeners.RecipeClickListener;
 
 public class MainActivity extends AppCompatActivity {
     ProgressDialog dialog;
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView = findViewById(R.id.recycler_random);
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 1));
-            randomRecipeAdapter = new RandomRecipeAdapter(MainActivity.this, response.recipes);
+            randomRecipeAdapter = new RandomRecipeAdapter(MainActivity.this, response.recipes,recipeClickListener);
             recyclerView.setAdapter(randomRecipeAdapter);
             dialog.dismiss();
         }
@@ -121,4 +123,12 @@ public class MainActivity extends AppCompatActivity {
             // Handle cases when no item is selected if needed
         }
         };
+    private final RecipeClickListener recipeClickListener = new RecipeClickListener() {
+        @Override
+        //show the recipe id
+        public void onRecipeClicked(String id) {
+            startActivity(new Intent(MainActivity.this, RecipeDetailsActivity.class)
+                    .putExtra("id",id));
+        }
+    };
 }

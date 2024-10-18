@@ -55,7 +55,11 @@ What sets Amazing Recipe apart is its integrated AI-powered chatbot, which provi
 
 [Gson Retrofit](Link: https://github.com/square/retrofit/tree/trunk/retrofit-converters/gson/)
 
+<<<<<<< HEAD
 [Picasso](Link: https://github.com/square/picasso)
+=======
+[Picasso](Link: https://github.com/square/picasso/)
+>>>>>>> 8db597305419a1ddb215be7cfe1923074906fb01
 
 
 

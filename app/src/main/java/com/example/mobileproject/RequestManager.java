@@ -3,11 +3,13 @@ import android.content.Context;
 
 import com.example.mobileproject.Models.RandomRecipetApiResponse;
 import com.example.mobileproject.Models.RecipeDetailsResponse;
+import com.example.mobileproject.Models.SimilarRecipeResponse;
 
 import java.util.List;
 
 import Listeners.RandomRecipeResponseListener;
 import Listeners.RecipeDetailsListener;
+import Listeners.SimilarRecipesListener;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,6 +70,27 @@ public class RequestManager {
             }
         });
     }
+
+    public void getSimilarRecipes(SimilarRecipesListener listener, int id){
+        CallSimilarRecipes callSimilarRecipes = retrofit.create(CallSimilarRecipes.class);
+        Call<List<SimilarRecipeResponse>> call = callSimilarRecipes.callSimilarRecipe(id, "4", context.getString(R.string.api_key));
+        call.enqueue(new Callback<List<SimilarRecipeResponse>>() {
+            @Override
+            public void onResponse(Call<List<SimilarRecipeResponse>> call, Response<List<SimilarRecipeResponse>> response) {
+                if (!response.isSuccessful()) {
+                    listener.didError(response.message());
+                    return;
+                }
+                listener.didFetch(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(Call<List<SimilarRecipeResponse>> call, Throwable t) {
+                listener.didError(t.getMessage());
+            }
+        });
+    }
+
     private interface CallRandomRecipes{
         @GET("recipes/random")
         Call<RandomRecipetApiResponse> callRandomRecipe(
@@ -85,4 +108,12 @@ public class RequestManager {
         );
     }
 
+    private interface CallSimilarRecipes{
+        @GET("recipes/{id}/similar")
+        Call<List<SimilarRecipeResponse>> callSimilarRecipe(
+                @Path("id") int id,
+                @Query("number") String number,
+                @Query("apiKey") String apiKey
+        );
+    }
 }

@@ -1,12 +1,14 @@
 package com.example.mobileproject;
 import android.content.Context;
 
+import com.example.mobileproject.Models.InstructionsResponse;
 import com.example.mobileproject.Models.RandomRecipetApiResponse;
 import com.example.mobileproject.Models.RecipeDetailsResponse;
 import com.example.mobileproject.Models.SimilarRecipeResponse;
 
 import java.util.List;
 
+import Listeners.InstructionsListener;
 import Listeners.RandomRecipeResponseListener;
 import Listeners.RecipeDetailsListener;
 import Listeners.SimilarRecipesListener;
@@ -91,6 +93,26 @@ public class RequestManager {
         });
     }
 
+    public void getInstructions(InstructionsListener listener, int id) {
+        CallInstructions callInstructions = retrofit.create(CallInstructions.class);
+        Call<List<InstructionsResponse>> call = callInstructions.callInstructions(id, context.getString(R.string.api_key));
+        call.enqueue(new Callback<List<InstructionsResponse>>() {
+            @Override
+            public void onResponse(Call<List<InstructionsResponse>> call, Response<List<InstructionsResponse>> response) {
+                if (!response.isSuccessful()) {
+                    listener.didError(response.message());
+                    return;
+                }
+                listener.didFetch((InstructionsResponse) response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(Call<List<InstructionsResponse>> call, Throwable t) {
+                listener.didError(t.getMessage());
+            }
+        });
+    }
+
     private interface CallRandomRecipes{
         @GET("recipes/random")
         Call<RandomRecipetApiResponse> callRandomRecipe(
@@ -113,6 +135,14 @@ public class RequestManager {
         Call<List<SimilarRecipeResponse>> callSimilarRecipe(
                 @Path("id") int id,
                 @Query("number") String number,
+                @Query("apiKey") String apiKey
+        );
+    }
+
+    private interface CallInstructions{
+        @GET("recipes/{id}/analyzedInstructions")
+        Call<List<InstructionsResponse>> callInstructions(
+                @Path("id") int id,
                 @Query("apiKey") String apiKey
         );
     }

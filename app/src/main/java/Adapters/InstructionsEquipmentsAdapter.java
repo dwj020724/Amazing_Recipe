@@ -40,8 +40,7 @@ public class InstructionsEquipmentsAdapter extends RecyclerView.Adapter<Instruct
     }
 
     @Override
-    public int getItemCount() {
-        return list.size();
+    public int getItemCount() {return list.size();
     }
 }
 

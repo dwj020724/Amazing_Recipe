@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "276944514328",
+    "project_id": "amazingrecipe-c3858",
+    "storage_bucket": "amazingrecipe-c3858.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276944514328:android:1f1e1ee35052d0cec6026d",
+        "android_client_info": {
+          "package_name": "com.example.mobileproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAc1Cqv3h6eXZ5CxL4qxuF-HKwm8hm3G4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

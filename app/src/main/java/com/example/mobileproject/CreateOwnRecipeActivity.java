@@ -196,7 +196,7 @@ public class CreateOwnRecipeActivity extends AppCompatActivity {
 //    String testJson = new Gson().toJson(new ChatRequest("gpt-3.5-turbo", new Message[]{new Message("user", "Test connection")}));
 //
 //    RequestBody body = RequestBody.create(testJson, MediaType.parse("application/json"));
-//    String apiKey = "Bearer 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";
+//    String apiKey = "Bearer MYKEY";
 //    // Replace securely in your environment
 //
 //    Request request = new Request.Builder()

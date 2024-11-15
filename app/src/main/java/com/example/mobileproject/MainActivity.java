@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     FirebaseUser user;
 
+    private static final int REQUEST_CREATE_OWN = 1;
+    private ArrayAdapter<CharSequence> arrayAdapter;
+    private boolean isSpinnerProgrammatic = false; // Flag to control spinner selection
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-       dialog = new ProgressDialog(this);
-       dialog.setTitle("Loading... ");
+        dialog = new ProgressDialog(this);
+        dialog.setTitle("Loading... ");
         searchView = findViewById(R.id.searchView_home);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -147,16 +151,71 @@ public class MainActivity extends AppCompatActivity {
     private final AdapterView.OnItemSelectedListener spinnerSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            tags.clear();
-            tags.add(adapterView.getSelectedItem().toString());
-            manager.getRandomRecipes(randomRecipeResponseListener, tags);
+//            tags.clear();
+//            tags.add(adapterView.getSelectedItem().toString());
+//            manager.getRandomRecipes(randomRecipeResponseListener, tags);
+            String selectedTag = adapterView.getSelectedItem().toString();
+
+            if (selectedTag.equals("create my own")) {
+                // Launch CreateOwnRecipeActivity for custom ingredient entry
+                Intent intent = new Intent(MainActivity.this, CreateOwnRecipeActivity.class);
+                startActivityForResult(intent, REQUEST_CREATE_OWN);
+            } else {
+                // Clear tags and update with selected item, then fetch random recipes
+                tags.clear();
+                tags.add(selectedTag);
+                manager.getRandomRecipes(randomRecipeResponseListener, tags);
+            }
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> adapterView) {
             // Handle cases when no item is selected if needed
         }
-        };
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CREATE_OWN && resultCode == RESULT_OK && data != null) {
+            String selectedTag = data.getStringExtra("selected_tag");
+            if (selectedTag != null) {
+                tags.clear();
+                tags.add(selectedTag);
+
+                // Check if arrayAdapter is null
+                if (arrayAdapter == null) {
+                    arrayAdapter = ArrayAdapter.createFromResource(
+                            this,
+                            R.array.tags,
+                            R.layout.spinner_text
+                    );
+                    arrayAdapter.setDropDownViewResource(R.layout.spinner_inner_text);
+                    spinner.setAdapter(arrayAdapter);
+                }
+
+                // Set the spinner selection programmatically
+                isSpinnerProgrammatic = true; // Set flag to true before changing selection
+                int position = arrayAdapter.getPosition(selectedTag);
+                Log.d("MainActivity", "Selected tag: " + selectedTag);
+                Log.d("MainActivity", "Spinner position: " + position);
+
+                if (position >= 0) {
+                    spinner.setSelection(position);
+                } else {
+                    // Handle invalid position
+                    Toast.makeText(this, "Selected tag not found in spinner options.", Toast.LENGTH_SHORT).show();
+                    // Optionally set a default selection
+                    spinner.setSelection(0);
+                }
+                isSpinnerProgrammatic = false; // Reset flag after changing selection
+
+                manager.getRandomRecipes(randomRecipeResponseListener, tags);
+                dialog.show();
+            }
+        }
+    }
     private final RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         //show the recipe id

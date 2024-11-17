@@ -151,7 +151,7 @@ public class CreateOwnRecipeActivity extends AppCompatActivity {
         String json = new Gson().toJson(chatRequest);
 
         // Create the request body
-        RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
 
         // Create the request object
         Request request = new Request.Builder()

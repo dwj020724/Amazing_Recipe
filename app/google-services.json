@@ -1,8 +1,9 @@
 {
   "project_info": {
     "project_number": "276944514328",
+    "firebase_url": "https://amazingrecipe-c3858-default-rtdb.firebaseio.com",
     "project_id": "amazingrecipe-c3858",
-    "storage_bucket": "amazingrecipe-c3858.appspot.com"
+    "storage_bucket": "amazingrecipe-c3858.firebasestorage.app"
   },
   "client": [
     {

@@ -34,12 +34,23 @@ What sets Amazing Recipe apart is its integrated AI-powered chatbot, which provi
 
 ## Features
 
-#### For Customers:
-1. xxx
+#### Comprehensive Recipe Discovery:
+1. Access to Spoonacular's extensive recipe database
+2. Detailed food information
+3. Smart search filters
+4. Step-by-step instructions
 
-2. xxx
+#### Smart Kitchen Management:
+1. Personal recipe storage 
+2. Favorite recipe collections 
+3. Equipment checklists
 
-3. xxx
+#### Smart Kitchen Management:
+1. Custom recipe generation 
+2. Real-time cooking advice 
+3. Dietary recommendations
+
+
 
 
 ## Full Stack Workload

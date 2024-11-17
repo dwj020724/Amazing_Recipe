@@ -45,5 +45,10 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.google.firebase:firebase-auth:23.1.0")
+<<<<<<< HEAD
+=======
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.google.code.gson:gson:2.8.8") //For parsing JSON
+>>>>>>> a22f4a4f633460ee1eb705ea71ebbfbb94d0688e
 
 }

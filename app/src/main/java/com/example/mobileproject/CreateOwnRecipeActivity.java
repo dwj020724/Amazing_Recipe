@@ -156,7 +156,7 @@ public class CreateOwnRecipeActivity extends AppCompatActivity {
         // Create the request object
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/chat/completions")
-                .addHeader("Authorization", "Bearer APIKEY") // Replace with your actual API key
+                .addHeader("Authorization", "myAPI") // Replace with your actual API key
                 .post(body)
                 .build();
 

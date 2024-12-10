@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AmazingReceipt</string>
+    <string name="app_name">Amazing Recipe</string>
     <string name="api_key"> 3477bd1c16e74a6c808497450e1d6144</string>
     <string name="login">LOGIN</string>
     <string name="email">Email</string>
